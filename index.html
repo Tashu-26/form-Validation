@@ -2,43 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Form Validation Project</title>
-
-    <!-- Link CSS -->
+    <title>Registration Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Registration Form</h2>
+<div class="container">
+    <h2>Registration Form</h2>
 
-        <form onsubmit="return validateForm()">
+    <label>Name</label>
+    <input type="text" id="name">
 
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Enter your name">
+    <label>Email</label>
+    <input type="email" id="email">
 
-            <label for="email">Email Address</label>
-            <input type="text" id="email" placeholder="Enter your email">
-
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter password">
-
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Re-enter password">
-
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" placeholder="Enter phone number">
-
-            <button type="submit">Register</button>
-
-            <!-- Error / Success Message -->
-            <p id="errorMsg"></p>
-
-        </form>
+    <label>Password</label>
+    <input type="password" id="password">
+    <div class="error orange" id="passError">
+        Password must be at least 6 characters
     </div>
 
-    <!-- Link JavaScript -->
-    <script src="script.js"></script>
+    <label>Confirm Password</label>
+    <input type="password" id="confirm">
+    <div class="error red" id="confirmError">
+        Passwords do not match
+    </div>
 
+    <label>Phone Number</label>
+    <input type="text" id="phone">
+    <div class="error blue" id="phoneError">
+        Phone must be 11 digits
+    </div>
+
+    <button onclick="validateForm()">Submit</button>
+
+    <div class="success" id="successMsg">
+        🎉 Registration Successful!
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
