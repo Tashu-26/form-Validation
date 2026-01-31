@@ -1,46 +1,48 @@
 function validateForm() {
+    let password = document.getElementById("password");
+    let confirm = document.getElementById("confirm");
+    let phone = document.getElementById("phone");
 
-    let name = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("password").value.trim();
-    let confirmPassword = document.getElementById("confirmPassword").value.trim();
-    let phone = document.getElementById("phone").value.trim();
+    let passError = document.getElementById("passError");
+    let confirmError = document.getElementById("confirmError");
+    let phoneError = document.getElementById("phoneError");
+    let successMsg = document.getElementById("successMsg");
 
-    let fields = [name, email, password, confirmPassword, phone];
+    let valid = true;
 
-    for (let i = 0; i < fields.length; i++) {
-        if (fields[i] === "") {
-            document.getElementById("errorMsg").innerText = "All fields are required";
-            return false;
-        }
+    // reset
+    passError.style.display = "none";
+    confirmError.style.display = "none";
+    phoneError.style.display = "none";
+    successMsg.style.display = "none";
+
+    password.classList.remove("shake");
+    confirm.classList.remove("shake");
+    phone.classList.remove("shake");
+
+    // password length
+    if (password.value.length < 6) {
+        passError.style.display = "block";
+        password.classList.add("shake");
+        valid = false;
     }
 
-    if (name.length < 3) {
-        document.getElementById("errorMsg").innerText = "Name must be at least 3 characters";
-        return false;
+    // password match
+    if (password.value !== confirm.value) {
+        confirmError.style.display = "block";
+        confirm.classList.add("shake");
+        valid = false;
     }
 
-    if (!email.includes("@") || !email.includes(".")) {
-        document.getElementById("errorMsg").innerText = "Please enter a valid email";
-        return false;
+    // phone number
+    if (phone.value.length !== 11) {
+        phoneError.style.display = "block";
+        phone.classList.add("shake");
+        valid = false;
     }
 
-    if (password.length < 6) {
-        document.getElementById("errorMsg").innerText = "Password must be at least 6 characters";
-        return false;
+    // success
+    if (valid) {
+        successMsg.style.display = "block";
     }
-
-    if (password !== confirmPassword) {
-        document.getElementById("errorMsg").innerText = "Passwords do not match";
-        return false;
-    }
-
-    if (isNaN(phone) || phone.length < 10) {
-        document.getElementById("errorMsg").innerText = "Please enter a valid phone number";
-        return false;
-    }
-
-    document.getElementById("errorMsg").style.color = "green";
-    document.getElementById("errorMsg").innerText = "Form submitted successfully!";
-    return true;
 }
